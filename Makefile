@@ -4,11 +4,13 @@ NAME = push_swap
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 MAIN = push_swap.c
+SRC = push_swap_utils.c
+ACTIONS = actions/sa.c actions/sb.c actions/ss.c actions/pa.c
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(MAIN)
-	$(CC) $(MAIN) $(CFLAGS)  -o $(NAME) $(LIBFT)
+$(NAME): $(LIBFT) $(MAIN) $(ACTIONS)
+	$(CC) $(MAIN)   -o $(NAME) $(LIBFT) $(SRC) $(ACTIONS)
 
 $(LIBFT):
 		cd $(LIBFT_DIR) && make

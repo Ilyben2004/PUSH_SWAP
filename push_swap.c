@@ -12,27 +12,20 @@ static void print_stack(stack_t * a)
 static int check_args(char **argv)
 {
     int i;
-    int j;
+
     
-    i = 1;
-    while (argv[i])
+    i = 0;
+    while (argv[++i])
     {
-        j = -1;
-        if(argv[i][0] == 0)
-            {
-                printf("you entred a empty number");
-                return 0;
-            }
-        while (argv[i][++j])
+        if (!is_number(argv[i]))
         {
-            if (!ft_isdigit(argv[i][j]))
-                return(printf("please enter just numbers"),0);
+            printf("enter valid args :) \n");
+            return (0);
         }
-        i++;
-        
     }
     return 1;
 }
+
 stack_t * create_stack_a( stack_t **a, char **argv)
 {
     stack_t *stack_a;
@@ -57,56 +50,60 @@ stack_t * create_stack_a( stack_t **a, char **argv)
     }
     return(*a);
 }
-static int stack_size(stack_t *a)
-{
-    int i;
-    
-    i = 0;
-    while (a)
-    {
-        i++;
-        a = a->next;
-    }
-    return (i);
 
-}
-static int *   create_sorted_array (stack_t *a)
+stack_t * create_stack_b( stack_t **b)
 {
-    int size;
+
+    *b = malloc(sizeof(stack_t));
+    (*b)->next = NULL;
+    return (*b);
+}
+
+static int *   create_sorted_array (stack_t *a, int size)
+{
     int *sorted_array;
     int i;
-    int j;
 
     i = 0;
-    size = stack_size(a);
     sorted_array = malloc(size * sizeof(int));
     while (i < size)
     {
         sorted_array[i] = a->value;
-        a = a->value;
+        a = a->next;
         i++;
     }
     i = 0;
-    while (i < size)
-    {
-        if(sorted_array[i] > size)
-        {
-            
-        }
-    }
-
-    
+    return bubble_sort(sorted_array,size);
 }
 int main(int argc, char ** argv )
 {
     stack_t *a;
+    stack_t *b;
    // stack_t b;
+    int size ;
+    int *sorted_array;
+
+    // a->next = NULL;
+    // b->next = NULL;
     if (argc <= 1 || !check_args(argv))
         return (0);
-    if (!create_stack_a(&a,argv))
+    if (!create_stack_a(&a,argv) && create_stack_b(&b))
         return 0;
+    pa(&b,&a);
+    printf("stack a : \n");
     print_stack(a);
-    create_sorted_array(*a);
+    printf("stack b : \n");
+    print_stack(b);
+        
+    // size = stack_size(a);
+    // sorted_array = create_sorted_array(a,size);
+    // int i = 0;
+    // while (i < size)
+    // {
+    //     printf("sorted_array[%d] = %d\n",i,sorted_array[i]);
+    //     i++;
+    // }
+    
 
 
 

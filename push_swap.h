@@ -9,5 +9,11 @@ typedef struct stack_s {
     struct stack_s *next;   
 } stack_t;
 
+int * bubble_sort(int * tab, int size);
+int is_number(char *number);
+int stack_size(stack_t *a);
+void sa(stack_t **a);
+void sb(stack_t **b);
+void pa(stack_t **a, stack_t **b);
 
 #endif
