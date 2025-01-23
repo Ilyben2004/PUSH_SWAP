@@ -5,11 +5,11 @@ LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 MAIN = push_swap.c
 SRC = push_swap_utils.c
-ACTIONS = actions/sa.c actions/sb.c actions/ss.c actions/pa.c
+ACTIONS = actions/sa.c actions/sb.c actions/ss.c actions/pa.c actions/pb.c actions/ra.c actions/rra.c actions/rb.c actions/rrb.c
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(MAIN) $(ACTIONS)
+$(NAME): $(LIBFT) $(MAIN) $(ACTIONS) $(SRC)
 	$(CC) $(MAIN)   -o $(NAME) $(LIBFT) $(SRC) $(ACTIONS)
 
 $(LIBFT):

@@ -1,14 +1,6 @@
 #include "push_swap.h"
 
-static void print_stack(stack_t * a)
-{
-    while (a)
-    {
-        printf("%d\n",a->value);
-        a = a->next;
-    }
 
-}
 static int check_args(char **argv)
 {
     int i;
@@ -84,28 +76,13 @@ int main(int argc, char ** argv )
     int *sorted_array;
 
     // a->next = NULL;
-    // b->next = NULL;
+    b = NULL;
     if (argc <= 1 || !check_args(argv))
         return (0);
     if (!create_stack_a(&a,argv) && create_stack_b(&b))
         return 0;
-    pa(&b,&a);
-    printf("stack a : \n");
-    print_stack(a);
-    printf("stack b : \n");
-    print_stack(b);
-        
-    // size = stack_size(a);
-    // sorted_array = create_sorted_array(a,size);
-    // int i = 0;
-    // while (i < size)
-    // {
-    //     printf("sorted_array[%d] = %d\n",i,sorted_array[i]);
-    //     i++;
-    // }
-    
-
-
-
+    size = stack_size(a);
+    sorted_array = create_sorted_array(a,size);
+    sort_stack(a,b,sorted_array);
 }
 
