@@ -93,31 +93,36 @@ int included_in_stack (int value, stack_t *a)
 
 void sort_stack(stack_t *a , stack_t *b, int * sorted_array)
 {
-    int div = 8; 
+    int div = 18;
     int size = stack_size(a);
     int mid = (size / 2) - 1;
-    int offset = size / 8;
+    int offset = size / div ;
     int start = mid - offset;
     int end = mid + offset;
     int i;
     int j = 0;
-
-   
+    
     while (a)
     {
         if(included_in_tab(a->value , sorted_array , start , end))
         {
-        
-           
             pb(&a,&b);
             printf("pb\n");
             if(b->value < sorted_array[mid])
-            {  
-                rb(&b);
-                printf("rb\n");
+            {
+                if(a && !included_in_tab(a->value , sorted_array , start , end))
+                {
+                    rr(&a,&b); 
+                    printf("rr\n");
 
+                    
+                }
+                else
+                {
+                    rb(&b);
+                    printf("rb\n");
+                }
             }
-
         }
         else
         {
@@ -192,38 +197,74 @@ int max_less_than(int max, int * tab , int size)
         return (max_ret);
 }
 
+int get_operation(stack_t *b ,int value)
+{
+    int size;
+    int i;
+
+    i = 0;
+    size = stack_size(b);
+    while (b)
+    {
+        if (b->value == value)
+            break;
+        i++;
+        b = b->next;
+    }
+    if (i > size/2)
+        return (i - size);
+    return (i);
+
+}
+
 void turn_it_back_to_a(stack_t *a , stack_t *b ,int * tab, int size)
 {
     int max;
-    int how_many_rrb;
+    int i;
 
-    how_many_rrb = 0;
+    i = 0;
     max = max_in_tab(tab,size);
     while (b)
     {
-     
         if (b->value == max)
         {
             pa(&a,&b);
             printf("pa\n");
-            max = max_less_than(max , tab , size);
-            while(how_many_rrb >0)
-            {
-                rrb(&b);
-                how_many_rrb--;
-                printf("rrb\n");
-            }
+            max = max_less_than(max,tab,size);
         }
         else
-        {
-            while (b->value != max)
+        {          
+            i = get_operation(b,max);
+            if (i > 0)
             {
-                rb(&b);
-                how_many_rrb++;
-                printf("rb\n");
+                while (i != 0)
+                {
+                      rb(&b);
+                      printf("rb\n");
+                      i--;
+                }
             }
+            else
+                while (i != 0)
+                {
+                    rrb(&b);
+                    printf("rrb\n");
+                    i++;
+                }
         }
     }
-    // printf("stack a is : \n");
+    // printf("stack a : \n");
     // print_stack(a);
+}
+
+void free_stacks_tab(stack_t * a, int * tab)
+{
+    stack_t * helper;
+    while (a)
+    {
+        helper = a->next;
+        free(a);
+        a = helper;
+    }
+    free(tab);
 }

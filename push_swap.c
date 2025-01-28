@@ -84,5 +84,6 @@ int main(int argc, char ** argv )
     size = stack_size(a);
     sorted_array = create_sorted_array(a,size);
     sort_stack(a,b,sorted_array);
+    free_stacks_tab(a,sorted_array);
 }
 

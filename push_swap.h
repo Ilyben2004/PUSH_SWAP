@@ -23,6 +23,7 @@ void  rra (stack_t **a);
 void rb(stack_t ** b);
 void ra(stack_t ** a);
 void  rrb (stack_t **b);
+void rr(stack_t **a, stack_t **b);
 
 // **********************************//
 void sort_stack(stack_t *a , stack_t *b, int * sorted_array);
@@ -32,4 +33,5 @@ void print_stack(stack_t * a);
 void turn_it_back_to_a(stack_t *a , stack_t *b ,int * tab, int size);
 int max_less_than(int max, int * tab , int size);
 int max_in_tab(int * tab , int size);
+void free_stacks_tab(stack_t * a, int * tab);
 #endif
