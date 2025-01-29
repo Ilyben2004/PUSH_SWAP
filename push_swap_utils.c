@@ -24,22 +24,7 @@ int * bubble_sort(int * tab, int size)
     }
     return (tab);
 }
-int is_number(char *number)
-{
-    if (*number == 0)
-        return 0;
-    if (*number == '+' || *number == '-')
-        number++;
-    if (*number == 0)
-        return (0);
-    while (*number)
-    {
-        if (!ft_isdigit(*number))
-            return (0);
-        number++;
-    }
-    return (1);
-}
+
 
 int stack_size(stack_t *a)
 {
@@ -91,69 +76,79 @@ int included_in_stack (int value, stack_t *a)
     return (0);
 }
 
-void sort_stack(stack_t *a , stack_t *b, int * sorted_array)
+void push_to_b(stack_t **a , stack_t **b, int * sorted_array, cords_t cords)
 {
-    int div = 18;
-    int size = stack_size(a);
-    int mid = (size / 2) - 1;
-    int offset = size / div ;
-    int start = mid - offset;
-    int end = mid + offset;
-    int i;
-    int j = 0;
-    
-    while (a)
+    pb(a,b);
+    printf("pb\n");
+    if((*b)->value < sorted_array[cords.mid])
     {
-        if(included_in_tab(a->value , sorted_array , start , end))
+        if(a && *a && !included_in_tab((*a)->value , sorted_array , cords.start , cords.end))
         {
-            pb(&a,&b);
-            printf("pb\n");
-            if(b->value < sorted_array[mid])
-            {
-                if(a && !included_in_tab(a->value , sorted_array , start , end))
-                {
-                    rr(&a,&b); 
-                    printf("rr\n");
-
-                    
-                }
-                else
-                {
-                    rb(&b);
-                    printf("rb\n");
-                }
-            }
+            rr(a,b); 
+            printf("rr\n");          
         }
         else
         {
-            i = check_values_in_tab(a,sorted_array , start, end);
-            if ( i == -1)
-            {
-                start -= offset;
-                end += offset;
-                if (start <0)
-                    start = 0;
-                if (end >= size)
-                    end = size - 1;
-            }
-            else
-            {
-                if (i != 0)
-                {
-                    j = 0;
-                    while (j < i )
-                    {
-                        ra(&a);
-                        printf("ra\n");
-                        j++;
-                    }
-                }
-            }
-
-
+            rb(b);
+            printf("rb\n");
         }
     }
-    turn_it_back_to_a(a,b,sorted_array,size);
+}
+
+void biggest_interval(cords_t * cords)
+{
+    cords->start -= cords->offset;
+    cords->end += cords->offset;
+    if (cords->start <0)
+        cords->start = 0;
+    if (cords->end >= cords->size)
+        cords->end = cords->size - 1;
+}
+
+void handle_a_rotate(stack_t **a, cords_t *cords , int * sorted_array)
+{
+    int i;
+    int j;
+
+    i = check_values_in_tab(*a,sorted_array , cords->start, cords->end);
+    if ( i == -1)
+        biggest_interval(cords);
+    else
+    {
+        if (i != 0)
+        {
+            j = 0;
+            while (j < i )
+            {
+                ra(a);
+                printf("ra\n");
+                j++;
+            }
+        }
+    }
+}
+
+
+void sort_stack(stack_t **a , stack_t **b, int * sorted_array)
+{
+    cords_t cords;
+    int i;
+    int j;
+
+    cords.div = 8;
+    cords.size = stack_size(*a);
+    cords.mid = (cords.size / 2) - 1;
+    cords.offset = cords.size / cords.div ;
+    cords.start = cords.mid - cords.offset;
+    cords.end = cords.mid + cords.offset;
+    while (*a)
+    {
+        if(included_in_tab((*a)->value , sorted_array , cords.start , cords.end))
+            push_to_b(a,b,sorted_array,cords);
+        else
+            handle_a_rotate(a,&cords,sorted_array);
+    }
+    turn_it_back_to_a(a,b,sorted_array,cords.size);
 }
 
 void print_stack(stack_t * a)
@@ -216,45 +211,47 @@ int get_operation(stack_t *b ,int value)
     return (i);
 
 }
+void handle_b_rortate(stack_t **b, int max)
+{
+    int i;
 
-void turn_it_back_to_a(stack_t *a , stack_t *b ,int * tab, int size)
+    i = get_operation(*b,max);
+    if (i > 0)
+    {
+        while (i != 0)
+        {
+            rb(b);
+            printf("rb\n");
+            i--;
+        }
+    }
+    else
+        while (i != 0)
+        {
+            rrb(b);
+            printf("rrb\n");
+            i++;
+        }
+
+}
+void turn_it_back_to_a(stack_t **a , stack_t **b ,int * tab, int size)
 {
     int max;
     int i;
 
     i = 0;
     max = max_in_tab(tab,size);
-    while (b)
+    while (*b)
     {
-        if (b->value == max)
+        if ((*b)->value == max)
         {
-            pa(&a,&b);
+            pa(a,b);
             printf("pa\n");
             max = max_less_than(max,tab,size);
         }
         else
-        {          
-            i = get_operation(b,max);
-            if (i > 0)
-            {
-                while (i != 0)
-                {
-                      rb(&b);
-                      printf("rb\n");
-                      i--;
-                }
-            }
-            else
-                while (i != 0)
-                {
-                    rrb(&b);
-                    printf("rrb\n");
-                    i++;
-                }
-        }
+            handle_b_rortate(b,max);
     }
-    // printf("stack a : \n");
-    // print_stack(a);
 }
 
 void free_stacks_tab(stack_t * a, int * tab)

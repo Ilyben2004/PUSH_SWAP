@@ -1,27 +1,32 @@
 #include "push_swap.h"
 
-
-static int check_args(char **argv)
+static int     ft_atoi(const char *str)
 {
-    int i;
+        int             sign;
+        size_t  result;
 
-    
-    i = 0;
-    while (argv[++i])
-    {
-        if (!is_number(argv[i]))
+        result = 0;
+        sign = 1;
+        while (*str && (*str == ' ' || *str == '\t' || *str == '\n' || *str == '\v'
+                        || *str == '\f' || *str == '\r'))
+                str++;
+        if (*str == '-' || *str == '+')
         {
-            printf("enter valid args :) \n");
-            return (0);
+                if (*str == '-')
+                        sign = -1;
+                str++;
         }
-    }
-    return 1;
+        while (ft_isdigit(*str))
+        {
+                result = result * 10 + (*str - '0');
+                str++;
+        }
+        return (result * sign);
 }
 
-stack_t * create_stack_a( stack_t **a, char **argv)
+static stack_t * create_stack_a( stack_t **a, char **argv)
 {
     stack_t *stack_a;
- 
     int i;
 
     i = 1;
@@ -29,9 +34,11 @@ stack_t * create_stack_a( stack_t **a, char **argv)
     *a = stack_a;
     while (argv[i])
     {
+        
         stack_a->value = ft_atoi(argv[i]);
         if (argv[i + 1] != NULL)
         {
+    
             stack_a->next = malloc(sizeof(stack_t));
             stack_a = stack_a->next;
           
@@ -43,13 +50,7 @@ stack_t * create_stack_a( stack_t **a, char **argv)
     return(*a);
 }
 
-stack_t * create_stack_b( stack_t **b)
-{
 
-    *b = malloc(sizeof(stack_t));
-    (*b)->next = NULL;
-    return (*b);
-}
 
 static int *   create_sorted_array (stack_t *a, int size)
 {
@@ -67,23 +68,23 @@ static int *   create_sorted_array (stack_t *a, int size)
     i = 0;
     return bubble_sort(sorted_array,size);
 }
-int main(int argc, char ** argv )
+int main(int argc, char ** argv)
 {
     stack_t *a;
     stack_t *b;
-   // stack_t b;
     int size ;
     int *sorted_array;
 
-    // a->next = NULL;
     b = NULL;
     if (argc <= 1 || !check_args(argv))
         return (0);
-    if (!create_stack_a(&a,argv) && create_stack_b(&b))
+    if (!create_stack_a(&a,argv))
         return 0;
     size = stack_size(a);
     sorted_array = create_sorted_array(a,size);
-    sort_stack(a,b,sorted_array);
+    if(check_duplicate(sorted_array, size))
+        return(free_stacks_tab(a,sorted_array),0);
+    sort_stack(&a,&b,sorted_array);
     free_stacks_tab(a,sorted_array);
 }
 

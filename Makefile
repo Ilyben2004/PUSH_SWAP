@@ -1,19 +1,17 @@
 CC = cc
 CFLAGS = -Wall -Werror -Wextra #-fsanitize=address
 NAME = push_swap
-LIBFT_DIR = libft
-LIBFT = $(LIBFT_DIR)/libft.a
+
 MAIN = push_swap.c
-SRC = push_swap_utils.c
+SRC = push_swap_utils.c clean_data.c
 ACTIONS = actions/sa.c actions/sb.c actions/ss.c actions/pa.c actions/pb.c actions/ra.c actions/rra.c actions/rb.c actions/rrb.c actions/rr.c
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(MAIN) $(ACTIONS) $(SRC)
+$(NAME):  $(MAIN) $(ACTIONS) $(SRC)
 	$(CC) $(MAIN)   -o $(NAME) $(LIBFT) $(SRC) $(ACTIONS)
 
-$(LIBFT):
-		cd $(LIBFT_DIR) && make
+
 
 clean:
 		cd $(LIBFT_DIR) && make clean
