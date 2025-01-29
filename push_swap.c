@@ -1,51 +1,37 @@
 #include "push_swap.h"
 
-static int     ft_atoi(const char *str)
-{
-        int             sign;
-        size_t  result;
 
-        result = 0;
-        sign = 1;
-        while (*str && (*str == ' ' || *str == '\t' || *str == '\n' || *str == '\v'
-                        || *str == '\f' || *str == '\r'))
-                str++;
-        if (*str == '-' || *str == '+')
-        {
-                if (*str == '-')
-                        sign = -1;
-                str++;
-        }
-        while (ft_isdigit(*str))
-        {
-                result = result * 10 + (*str - '0');
-                str++;
-        }
-        return (result * sign);
-}
+
 
 static stack_t * create_stack_a( stack_t **a, char **argv)
 {
     stack_t *stack_a;
     int i;
+    char **splited;
+    int j;
+
 
     i = 1;
     stack_a = malloc(sizeof(stack_t));
     *a = stack_a;
     while (argv[i])
     {
-        
-        stack_a->value = ft_atoi(argv[i]);
-        if (argv[i + 1] != NULL)
+        splited = ft_split(argv[i],' ');
+        j = 0;
+        while (splited[j])
         {
-    
-            stack_a->next = malloc(sizeof(stack_t));
-            stack_a = stack_a->next;
-          
+            stack_a->value = ft_atoi(splited[j]);
+            if (splited[j + 1] != NULL || argv[i + 1] != NULL)
+            {
+                stack_a->next = malloc(sizeof(stack_t));
+                stack_a = stack_a->next; 
+            }
+            else
+                stack_a->next = NULL;
+            j++;
         }
-        else
-            stack_a->next = NULL;
-          i++;
+        free_splited(splited);
+        i++;
     }
     return(*a);
 }
@@ -82,8 +68,8 @@ int main(int argc, char ** argv)
         return 0;
     size = stack_size(a);
     sorted_array = create_sorted_array(a,size);
-    if(check_duplicate(sorted_array, size))
-        return(free_stacks_tab(a,sorted_array),0);
+    // if(check_duplicate(sorted_array, size))
+    //     return(free_stacks_tab(a,sorted_array),0);
     sort_stack(&a,&b,sorted_array);
     free_stacks_tab(a,sorted_array);
 }

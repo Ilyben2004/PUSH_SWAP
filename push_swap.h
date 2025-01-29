@@ -3,6 +3,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <limits.h>
 
 typedef struct stack_s {
     int value;             
@@ -19,6 +20,9 @@ typedef struct cords_s
     int start;
     int end;
 } cords_t;
+
+# define OUT_OF_RANGE "please respect the valid range of integers\n"
+# define ERROR_ARGS "please enter valid arguments , only numbers\n"
 
 int * bubble_sort(int * tab, int size);
 int is_number(char *number);
@@ -50,5 +54,8 @@ int is_number(char *number);
 int check_args(char **argv);
 int check_duplicate(int * sorted_array , int size);
 void sort_three(stack_t **a , stack_t **b);
+char    **ft_split(char const *s, char c);
+long     ft_atoi(const char *str);
+void free_splited(char ** splited);
 
 #endif

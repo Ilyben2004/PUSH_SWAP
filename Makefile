@@ -9,7 +9,7 @@ ACTIONS = actions/sa.c actions/sb.c actions/ss.c actions/pa.c actions/pb.c actio
 all: $(NAME)
 
 $(NAME):  $(MAIN) $(ACTIONS) $(SRC)
-	$(CC) $(MAIN)   -o $(NAME) $(LIBFT) $(SRC) $(ACTIONS)
+	$(CC) $(MAIN)   -o $(NAME) $(LIBFT) $(SRC) $(ACTIONS) libft.a
 
 
 

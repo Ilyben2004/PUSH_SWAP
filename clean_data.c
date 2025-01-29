@@ -3,18 +3,30 @@
 int check_args(char **argv)
 {
     int i;
-
+    char **splited;
+    int j;
+    int isnumber;
     
     i = 0;
     while (argv[++i])
     {
-        if (!is_number(argv[i]))
+        j = 0;
+        splited = ft_split(argv[i], ' ');
+        while (splited[j])
         {
-            printf("enter valid args :) \n");
-            return (0);
+            isnumber =  is_number(splited[j]);
+            if (!isnumber)
+                return (write(1,"enter valid args :) \n",21),free_splited(splited),0);
+            else if (isnumber)
+            {
+                if(ft_atoi(splited[j]) > INT_MAX || ft_atoi(splited[j]) < INT_MIN ) 
+                    return(write(1,OUT_OF_RANGE,43),free_splited(splited),0);
+            }
+            j++;
         }
+        free_splited(splited);
     }
-    return 1;
+    return (1);
 }
 int is_number(char *number)
 {
@@ -37,6 +49,9 @@ int     ft_isdigit(int c)
 {
         return ((c >= '0' && c <= '9'));
 }
+
+
+
 
 int check_duplicate(int * sorted_array , int size)
 {
