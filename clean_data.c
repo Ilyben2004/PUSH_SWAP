@@ -1,5 +1,16 @@
 #include "push_swap.h"
 
+int is_all_space(char *s)
+{
+    while (*s)
+    {
+        if (*s != ' ')
+            return(0);
+        s++;
+    } 
+    return (1);
+}
+
 int check_args(char **argv)
 {
     int i;
@@ -10,6 +21,8 @@ int check_args(char **argv)
     i = 0;
     while (argv[++i])
     {
+        if(!*argv[i] || is_all_space(argv[i]))
+            return(write(1,"invalid arg\n",12),0);
         j = 0;
         splited = ft_split(argv[i], ' ');
         while (splited[j])
@@ -73,5 +86,5 @@ int check_duplicate(int * sorted_array , int size)
         }
         i++;
     }
-    return (1);
+    return (0);
 }

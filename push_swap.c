@@ -68,9 +68,11 @@ int main(int argc, char ** argv)
         return 0;
     size = stack_size(a);
     sorted_array = create_sorted_array(a,size);
-    // if(check_duplicate(sorted_array, size))
-    //     return(free_stacks_tab(a,sorted_array),0);
-    sort_stack(&a,&b,sorted_array);
+    if(check_duplicate(sorted_array, size))
+        return(free_stacks_tab(a,sorted_array),0);
+    if (!is_sorted(a))
+        sort_stack(&a,&b,sorted_array);
     free_stacks_tab(a,sorted_array);
 }
+
 

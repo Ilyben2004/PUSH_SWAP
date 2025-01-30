@@ -53,9 +53,13 @@ int     ft_isdigit(int c);
 int is_number(char *number);
 int check_args(char **argv);
 int check_duplicate(int * sorted_array , int size);
-void sort_three(stack_t **a , stack_t **b);
+void sort_three(stack_t **a);
 char    **ft_split(char const *s, char c);
 long     ft_atoi(const char *str);
 void free_splited(char ** splited);
-
+void sort_five(stack_t **a , stack_t **b);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+char    *ft_strdup(const char *s);
+size_t  ft_strlen(const char *s);
+int is_sorted(stack_t *a);
 #endif

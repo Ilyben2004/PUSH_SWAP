@@ -26,19 +26,6 @@ int * bubble_sort(int * tab, int size)
 }
 
 
-int stack_size(stack_t *a)
-{
-    int i;
-    
-    i = 0;
-    while (a)
-    {
-        i++;
-        a = a->next;
-    }
-    return (i);
-
-}
 int included_in_tab(int value, int * tab, int start , int end)
 {
     while (start <= end)
@@ -78,11 +65,12 @@ int included_in_stack (int value, stack_t *a)
 
 void push_to_b(stack_t **a , stack_t **b, int * sorted_array, cords_t cords)
 {
+
     pb(a,b);
     printf("pb\n");
     if((*b)->value < sorted_array[cords.mid])
     {
-        if(a && *a && !included_in_tab((*a)->value , sorted_array , cords.start , cords.end))
+        if(a && *a && !included_in_tab((*a)->value , sorted_array , cords.start , cords.end) && check_values_in_tab(*a,sorted_array , cords.start, cords.end) != -1)
         {
             rr(a,b); 
             printf("rr\n");          
@@ -108,7 +96,6 @@ void biggest_interval(cords_t * cords)
 void handle_a_rotate(stack_t **a, cords_t *cords , int * sorted_array)
 {
     int i;
-    int j;
 
     i = check_values_in_tab(*a,sorted_array , cords->start, cords->end);
     if ( i == -1)
@@ -117,30 +104,48 @@ void handle_a_rotate(stack_t **a, cords_t *cords , int * sorted_array)
     {
         if (i != 0)
         {
-            j = 0;
-            while (j < i )
+
+            while (i != 0)
             {
                 ra(a);
                 printf("ra\n");
-                j++;
+                i--;
             }
         }
-    }
+     }
 }
 
-
+void init_cords(cords_t * cords , stack_t *a)
+{
+    cords->size = stack_size(a);
+    if (cords->size > 100)
+        cords->div = 18;
+    else if (cords->size <= 100 &&  cords->size >= 10)
+        cords->div = 8;
+    else 
+        cords->div = 4;
+    cords->mid = (cords->size / 2) - 1;
+    cords->offset = cords->size / cords->div ;
+    cords->start = cords->mid - cords->offset;
+    cords->end = cords->mid + cords->offset;
+}
 void sort_stack(stack_t **a , stack_t **b, int * sorted_array)
 {
     cords_t cords;
     int i;
     int j;
 
-    cords.div = 8;
-    cords.size = stack_size(*a);
-    cords.mid = (cords.size / 2) - 1;
-    cords.offset = cords.size / cords.div ;
-    cords.start = cords.mid - cords.offset;
-    cords.end = cords.mid + cords.offset;
+    init_cords(&cords , *a);
+    if(cords.size <= 5)
+    {
+        if (cords.size == 1)
+            return;
+        else if (cords.size <= 3)
+            sort_three(a);
+        else 
+            sort_five(a,b);
+        return;
+    }
     while (*a)
     {
         if(included_in_tab((*a)->value , sorted_array , cords.start , cords.end))
@@ -266,29 +271,7 @@ void free_stacks_tab(stack_t * a, int * tab)
     free(tab);
 }
 
-long     ft_atoi(const char *str)
-{
-        long             sign;
-        size_t  result;
 
-        result = 0;
-        sign = 1;
-        while (*str && (*str == ' ' || *str == '\t' || *str == '\n' || *str == '\v'
-                        || *str == '\f' || *str == '\r'))
-                str++;
-        if (*str == '-' || *str == '+')
-        {
-                if (*str == '-')
-                        sign = -1;
-                str++;
-        }
-        while (ft_isdigit(*str))
-        {
-                result = result * 10 + (*str - '0');
-                str++;
-        }
-        return (result * sign);
-}
 
 void free_splited(char ** splited)
 {
