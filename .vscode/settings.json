@@ -68,6 +68,8 @@
     "unordered_map": "c",
     "vector": "c",
     "text_encoding": "c",
-    "push_swap.h": "c"
+    "push_swap.h": "c",
+    "random": "c",
+    "limits": "c"
   }
 }

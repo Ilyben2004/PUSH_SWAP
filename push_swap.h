@@ -21,6 +21,14 @@ typedef struct cords_s
     int end;
 } cords_t;
 
+typedef struct  max_s
+{
+    int max;
+    int less_than_max;
+    int less_than_max_pushed;
+} max_t;
+
+
 # define OUT_OF_RANGE "please respect the valid range of integers\n"
 # define ERROR_ARGS "please enter valid arguments , only numbers\n"
 
