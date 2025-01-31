@@ -4,7 +4,6 @@ void rb(stack_t ** b)
 
 {
     int size;  
-    stack_t *last_one;
     stack_t *second_one;
     stack_t *first_one;
 

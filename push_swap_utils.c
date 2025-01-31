@@ -133,8 +133,6 @@ void init_cords(cords_t * cords , stack_t *a)
 void sort_stack(stack_t **a , stack_t **b, int * sorted_array)
 {
     cords_t cords;
-    int i;
-    int j;
 
     init_cords(&cords , *a);
     if(cords.size <= 5)
@@ -217,11 +215,24 @@ int get_operation(stack_t *b ,int value)
     return (i);
 
 }
-void handle_b_rortate(stack_t **b, int max)
+int abs(int a)
+{
+    if (a >= 0)
+        return (a);
+    return(-a);
+}
+void handle_b_rortate(stack_t **b, int max,int less_than_max , int  less_than_max_pushed)
 {
     int i;
+    int j;
 
     i = get_operation(*b,max);
+    if (less_than_max_pushed == 0)
+    {
+        j = get_operation(*b, less_than_max);
+        if (abs(j) < abs(i))
+            i = j;
+    }
     if (i > 0)
     {
         while (i != 0)
@@ -244,19 +255,41 @@ void turn_it_back_to_a(stack_t **a , stack_t **b ,int * tab, int size)
 {
     int max;
     int i;
+    int less_than_max;
+    int less_than_max_pushed;
+
 
     i = 0;
+    less_than_max_pushed = 0;
     max = max_in_tab(tab,size);
+    less_than_max = max_less_than(max , tab , size);
     while (*b)
     {
-        if ((*b)->value == max)
+           
+        if ((*b)->value == max || ((*b)->value == less_than_max))
         {
+            if ((*b)->value == less_than_max)
+                less_than_max_pushed = 1;
             pa(a,b);
             printf("pa\n");
-            max = max_less_than(max,tab,size);
+            if((*a)->value == max)
+            {
+                if ( (*a)->next && (*a)->value > (*a)->next->value )
+                {   sa(a);
+                    printf("sa\n");
+                }
+                if (less_than_max_pushed == 1)
+                    max = max_less_than(less_than_max,tab,size);
+                else
+                    max = max_less_than(max,tab,size);
+                less_than_max_pushed = 0;
+                less_than_max =  max_less_than(max ,tab,size );
+            }
         }
         else
-            handle_b_rortate(b,max);
+        {
+            handle_b_rortate(b,max,less_than_max,less_than_max_pushed);
+        }
     }
 }
 

@@ -106,23 +106,4 @@ void sort_five(stack_t **a , stack_t **b)
     pa(a,b);
     pa(a, b);
     write(1,"pa\npa\n",6);
-
-
-
 }
-
-
-/*
-pseudocode
-if first node is biggest = ra
-if second node is biggest = rra
-if first > second = sa
-
-
-while size > 3
-    find smallest
-    rotate to top of a
-    then push to b
-sort_3
-pb pb
-*/

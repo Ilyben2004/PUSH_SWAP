@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS =  #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address
 NAME = push_swap
 
 MAIN = push_swap.c

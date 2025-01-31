@@ -4,7 +4,6 @@ void ra(stack_t ** a)
 
 {
     int size;  
-    stack_t *last_one;
     stack_t *second_one;
     stack_t *first_one;
 
