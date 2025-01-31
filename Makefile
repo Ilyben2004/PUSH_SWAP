@@ -15,10 +15,10 @@ $(NAME):  $(MAIN) $(BSRCS)
 
 
 clean:
-		rm $(BSRCS)
+		rm -rf $(BSRCS)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -rf $(NAME)
 
 re: fclean all
 

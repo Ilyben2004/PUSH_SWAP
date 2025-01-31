@@ -75,6 +75,10 @@ long     ft_atoi(const char *str)
         while (ft_isdigit(*str))
         {
             result = result * 10 + (*str - '0');
+            if(result > INT_MAX && sign == 1)
+                return (result);
+            if (result > ((long ) INT_MAX + 1) && !sign)
+                return(-result);    
             str++;
         }
         return (result * sign);

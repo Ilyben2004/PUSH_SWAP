@@ -22,14 +22,16 @@ int check_args(char **argv)
     while (argv[++i])
     {
         if(!*argv[i] || is_all_space(argv[i]))
-            return(write(1,"invalid arg\n",12),0);
+            return(write(1,"Error\n",6),0);
         j = 0;
         splited = ft_split(argv[i], ' ');
+        if (!splited)
+            return(0);
         while (splited[j])
         {
             isnumber =  is_number(splited[j]);
             if (!isnumber)
-                return (write(1,"enter valid args :) \n",21),free_splited(splited),0);
+                return (write(1,"Error\n",6),free_splited(splited),0);
             else if (isnumber)
             {
                 if(ft_atoi(splited[j]) > INT_MAX || ft_atoi(splited[j]) < INT_MIN ) 

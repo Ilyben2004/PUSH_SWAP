@@ -52,6 +52,7 @@ int check_values_in_tab(stack_t *a, int * tab, int start , int end)
 
 }
 
+
 int included_in_stack (int value, stack_t *a)
 {
     while (a)
@@ -268,7 +269,8 @@ void free_stacks_tab(stack_t * a, int * tab)
         free(a);
         a = helper;
     }
-    free(tab);
+    if(tab)
+        free(tab);
 }
 
 

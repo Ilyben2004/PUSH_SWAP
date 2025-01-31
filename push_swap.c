@@ -13,6 +13,8 @@ static stack_t * create_stack_a( stack_t **a, char **argv)
 
     i = 1;
     stack_a = malloc(sizeof(stack_t));
+    if (!stack_a)
+        return (NULL);
     *a = stack_a;
     while (argv[i])
     {
@@ -25,6 +27,8 @@ static stack_t * create_stack_a( stack_t **a, char **argv)
             {
                 stack_a->next = malloc(sizeof(stack_t));
                 stack_a = stack_a->next; 
+                if (!stack_a)
+                    return(free_stacks_tab(*a, NULL),NULL);
             }
             else
                 stack_a->next = NULL;
@@ -63,16 +67,17 @@ int main(int argc, char ** argv)
 
     b = NULL;
     if (argc <= 1 || !check_args(argv))
-        return (0);
+        return (EXIT_FAILURE);
     if (!create_stack_a(&a,argv))
-        return 0;
+        return (EXIT_FAILURE);
     size = stack_size(a);
     sorted_array = create_sorted_array(a,size);
     if(check_duplicate(sorted_array, size))
-        return(free_stacks_tab(a,sorted_array),0);
+        return(free_stacks_tab(a,sorted_array),1);
     if (!is_sorted(a))
         sort_stack(&a,&b,sorted_array);
     free_stacks_tab(a,sorted_array);
+    return EXIT_SUCCESS;
 }
 
 
