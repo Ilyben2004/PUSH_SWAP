@@ -28,10 +28,6 @@ typedef struct  max_s
     int less_than_max_pushed;
 } max_t;
 
-
-# define OUT_OF_RANGE "please respect the valid range of integers\n"
-# define ERROR_ARGS "please enter valid arguments , only numbers\n"
-
 int * bubble_sort(int * tab, int size);
 int is_number(char *number);
 int stack_size(stack_t *a);
@@ -70,4 +66,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char    *ft_strdup(const char *s);
 size_t  ft_strlen(const char *s);
 int is_sorted(stack_t *a);
+int get_operation(stack_t *b ,int value);
+
 #endif

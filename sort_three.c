@@ -70,19 +70,9 @@ void sort_three(stack_t **a)
     }
   
 }
-void sort_five(stack_t **a , stack_t **b)
+
+static void sort_five_helper(stack_t **a ,int ops)
 {
-    int pos;
-    int ops;
-
-
-    while (stack_size(*a) > 3)
-    {
-        pos = get_max_min_pos(*a , 0);
-        if (pos > stack_size(*a) / 2)
-            ops = pos - stack_size(*a);
-        else 
-            ops = pos;
         while (ops != 0)
         {
             if (ops > 0)
@@ -99,6 +89,22 @@ void sort_five(stack_t **a , stack_t **b)
             }
 
         }
+}
+
+void sort_five(stack_t **a , stack_t **b)
+{
+    int pos;
+    int ops;
+
+
+    while (stack_size(*a) > 3)
+    {
+        pos = get_max_min_pos(*a , 0);
+        if (pos > stack_size(*a) / 2)
+            ops = pos - stack_size(*a);
+        else 
+            ops = pos;
+        sort_five_helper(a,ops);
         pb(a,b);
         write(1,"pb\n",3);
     }

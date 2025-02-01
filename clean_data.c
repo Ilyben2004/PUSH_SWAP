@@ -16,28 +16,23 @@ int check_args(char **argv)
     int i;
     char **splited;
     int j;
-    int isnumber;
-    
+
     i = 0;
     while (argv[++i])
     {
         if(!*argv[i] || is_all_space(argv[i]))
             return(write(1,"Error\n",6),0);
-        j = 0;
+        j = -1;
         splited = ft_split(argv[i], ' ');
         if (!splited)
             return(0);
-        while (splited[j])
+        while (splited[++j])
         {
-            isnumber =  is_number(splited[j]);
-            if (!isnumber)
+            if (!is_number(splited[j]))
                 return (write(1,"Error\n",6),free_splited(splited),0);
-            else if (isnumber)
-            {
+            else if (is_number(splited[j]))
                 if(ft_atoi(splited[j]) > INT_MAX || ft_atoi(splited[j]) < INT_MIN ) 
-                    return(write(1,OUT_OF_RANGE,43),free_splited(splited),0);
-            }
-            j++;
+                    return(write(1,"Error\n",6),free_splited(splited),0);
         }
         free_splited(splited);
     }
@@ -65,9 +60,6 @@ int     ft_isdigit(int c)
         return ((c >= '0' && c <= '9'));
 }
 
-
-
-
 int check_duplicate(int * sorted_array , int size)
 {
     int i;
@@ -81,7 +73,7 @@ int check_duplicate(int * sorted_array , int size)
         {
             if (sorted_array[i] == sorted_array[j])
             {
-                write(1,"please enter numbers without duplucate\n",39);
+                write(1,"Error\n",6);
                 return(1);
             }
             j++;
