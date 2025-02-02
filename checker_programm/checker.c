@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ibennaje <ibennaje@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/02 18:40:17 by ibennaje          #+#    #+#             */
+/*   Updated: 2025/02/02 18:40:18 by ibennaje         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "checker.h"
 
-static void	*create_stack_a_helper(stack_t **stack_a, stack_t **a, char **argv,
+static void	*create_stack_a_helper(t_stack **stack_a, t_stack **a, char **argv,
 		int i)
 {
 	char	**splited;
@@ -15,7 +27,7 @@ static void	*create_stack_a_helper(stack_t **stack_a, stack_t **a, char **argv,
 		(*stack_a)->value = ft_atoi(splited[j]);
 		if (splited[j + 1] != NULL || argv[i + 1] != NULL)
 		{
-			(*stack_a)->next = malloc(sizeof(stack_t));
+			(*stack_a)->next = malloc(sizeof(t_stack));
 			(*stack_a) = (*stack_a)->next;
 			if (!(*stack_a))
 				return (free_splited(splited), free_stacks_tab(*a, NULL), NULL);
@@ -27,13 +39,13 @@ static void	*create_stack_a_helper(stack_t **stack_a, stack_t **a, char **argv,
 	return ("valid");
 }
 
-static stack_t	*create_stack_a(stack_t **a, char **argv)
+static t_stack	*create_stack_a(t_stack **a, char **argv)
 {
-	stack_t	*stack_a;
+	t_stack	*stack_a;
 	int		i;
 
 	i = 0;
-	stack_a = malloc(sizeof(stack_t));
+	stack_a = malloc(sizeof(t_stack));
 	if (!stack_a)
 		if (!stack_a)
 			return (NULL);
@@ -46,7 +58,7 @@ static stack_t	*create_stack_a(stack_t **a, char **argv)
 	return (*a);
 }
 
-static int	*create_sorted_array(stack_t *a, int size)
+static int	*create_sorted_array(t_stack *a, int size)
 {
 	int	*sorted_array;
 	int	i;
@@ -64,7 +76,8 @@ static int	*create_sorted_array(stack_t *a, int size)
 	i = 0;
 	return (bubble_sort(sorted_array, size));
 }
-static int	finish_it(stack_t *a, int *sorted_array)
+
+static int	finish_it(t_stack *a, int *sorted_array)
 {
 	if (is_sorted(a))
 		write(1, "OK\n", 3);
@@ -76,8 +89,8 @@ static int	finish_it(stack_t *a, int *sorted_array)
 
 int	main(int argc, char **argv)
 {
-	stack_t	*a;
-	stack_t	*b;
+	t_stack	*a;
+	t_stack	*b;
 	int		*sorted_array;
 	char	*line;
 

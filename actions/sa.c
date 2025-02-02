@@ -1,11 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sa.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ibennaje <ibennaje@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/02 18:37:23 by ibennaje          #+#    #+#             */
+/*   Updated: 2025/02/02 18:38:39 by ibennaje         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../push_swap.h"
 
-void	sa(stack_t **a)
+void	sa(t_stack **a)
 {
-	int size;
-	stack_t *helper;
-	stack_t *helper2;
-	;
+	int		size;
+	t_stack	*helper;
+	t_stack	*helper2;
 
 	size = stack_size(*a);
 	if (size >= 2)

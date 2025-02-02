@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ibennaje <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/02 18:20:27 by ibennaje          #+#    #+#             */
+/*   Updated: 2025/02/02 18:20:29 by ibennaje         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	*bubble_sort(int *tab, int size)
@@ -35,7 +47,8 @@ int	included_in_tab(int value, int *tab, int start, int end)
 	}
 	return (0);
 }
-int	check_values_in_tab(stack_t *a, int *tab, int start, int end)
+
+int	check_values_in_tab(t_stack *a, int *tab, int start, int end)
 {
 	int	i;
 
@@ -50,7 +63,7 @@ int	check_values_in_tab(stack_t *a, int *tab, int start, int end)
 	return (-1);
 }
 
-int	included_in_stack(int value, stack_t *a)
+int	included_in_stack(int value, t_stack *a)
 {
 	while (a)
 	{

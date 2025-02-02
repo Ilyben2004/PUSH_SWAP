@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rb.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ibennaje <ibennaje@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/02 18:36:59 by ibennaje          #+#    #+#             */
+/*   Updated: 2025/02/02 18:38:07 by ibennaje         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../push_swap.h"
 
-void	rb(stack_t **b)
+void	rb(t_stack **b)
 
 {
-	int size;
-	stack_t *second_one;
-	stack_t *first_one;
+	int		size;
+	t_stack	*second_one;
+	t_stack	*first_one;
 
 	size = stack_size(*b);
 	if (size >= 2)

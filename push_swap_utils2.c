@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap_utils2.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ibennaje <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/02 18:21:04 by ibennaje          #+#    #+#             */
+/*   Updated: 2025/02/02 18:21:06 by ibennaje         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	max_in_tab(int *tab, int size)
@@ -32,7 +44,7 @@ int	max_less_than(int max, int *tab, int size)
 	return (max_ret);
 }
 
-int	get_operation(stack_t *b, int value)
+int	get_operation(t_stack *b, int value)
 {
 	int	size;
 	int	i;
@@ -51,9 +63,9 @@ int	get_operation(stack_t *b, int value)
 	return (i);
 }
 
-void	free_stacks_tab(stack_t *a, int *tab)
+void	free_stacks_tab(t_stack *a, int *tab)
 {
-	stack_t	*helper;
+	t_stack	*helper;
 
 	while (a)
 	{
@@ -67,7 +79,7 @@ void	free_stacks_tab(stack_t *a, int *tab)
 
 void	free_splited(char **splited)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (splited[i])

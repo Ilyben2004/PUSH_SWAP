@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_three.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ibennaje <ibennaje@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/02 18:34:58 by ibennaje          #+#    #+#             */
+/*   Updated: 2025/02/02 18:34:59 by ibennaje         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-int	is_sorted(stack_t *a)
+int	is_sorted(t_stack *a)
 {
 	while (a)
 	{
@@ -14,11 +26,11 @@ int	is_sorted(stack_t *a)
 	return (1);
 }
 
-static int	get_max_min_pos(stack_t *a, int max)
+static int	get_max_min_pos(t_stack *a, int max)
 {
 	int		max_min_value;
 	int		i;
-	stack_t	*helper;
+	t_stack	*helper;
 	int		pos;
 
 	max_min_value = a->value;
@@ -43,7 +55,7 @@ static int	get_max_min_pos(stack_t *a, int max)
 	return (pos);
 }
 
-void	sort_three(stack_t **a)
+void	sort_three(t_stack **a)
 {
 	int	pos;
 	int	size;
@@ -70,7 +82,7 @@ void	sort_three(stack_t **a)
 	}
 }
 
-static void	sort_five_helper(stack_t **a, int ops)
+static void	sort_five_helper(t_stack **a, int ops)
 {
 	while (ops != 0)
 	{
@@ -89,7 +101,7 @@ static void	sort_five_helper(stack_t **a, int ops)
 	}
 }
 
-void	sort_five(stack_t **a, stack_t **b)
+void	sort_five(t_stack **a, t_stack **b)
 {
 	int	pos;
 	int	ops;

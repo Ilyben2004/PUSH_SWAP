@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibennaje <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ibennaje <ibennaje@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:49:55 by ibennaje          #+#    #+#             */
-/*   Updated: 2024/12/29 19:49:59 by ibennaje         ###   ########.fr       */
+/*   Updated: 2025/02/02 18:41:04 by ibennaje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,3 @@ char	*ft_strchr(const char *s, int c)
 	}
 	return (NULL);
 }
-

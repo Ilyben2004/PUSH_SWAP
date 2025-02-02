@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ibennaje <ibennaje@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/02 18:40:19 by ibennaje          #+#    #+#             */
+/*   Updated: 2025/02/02 18:40:20 by ibennaje         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "checker.h"
 
 int	ft_strncmp(const char *s1, const char *s2, int n)
@@ -16,7 +28,7 @@ int	ft_strncmp(const char *s1, const char *s2, int n)
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
-int	execute_action(stack_t **a, stack_t **b, char *line)
+int	execute_action(t_stack **a, t_stack **b, char *line)
 {
 	if (!ft_strncmp(line, "pa\n", 3))
 		return (pa(a, b), 1);

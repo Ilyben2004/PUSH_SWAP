@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_to_b.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ibennaje <ibennaje@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/02 18:34:53 by ibennaje          #+#    #+#             */
+/*   Updated: 2025/02/02 18:34:54 by ibennaje         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void	push_to_b(stack_t **a, stack_t **b, int *sorted_array, cords_t cords)
+void	push_to_b(t_stack **a, t_stack **b, int *sorted_array, t_cords cords)
 {
 	pb(a, b);
 	printf("pb\n");
@@ -21,7 +33,7 @@ void	push_to_b(stack_t **a, stack_t **b, int *sorted_array, cords_t cords)
 	}
 }
 
-void	biggest_interval(cords_t *cords)
+void	biggest_interval(t_cords *cords)
 {
 	cords->start -= cords->offset;
 	cords->end += cords->offset;
@@ -31,7 +43,7 @@ void	biggest_interval(cords_t *cords)
 		cords->end = cords->size - 1;
 }
 
-void	handle_a_rotate(stack_t **a, cords_t *cords, int *sorted_array)
+void	handle_a_rotate(t_stack **a, t_cords *cords, int *sorted_array)
 {
 	int	i;
 
@@ -52,7 +64,7 @@ void	handle_a_rotate(stack_t **a, cords_t *cords, int *sorted_array)
 	}
 }
 
-void	init_cords(cords_t *cords, stack_t *a)
+void	init_cords(t_cords *cords, t_stack *a)
 {
 	cords->size = stack_size(a);
 	if (cords->size > 100)
@@ -66,9 +78,10 @@ void	init_cords(cords_t *cords, stack_t *a)
 	cords->start = cords->mid - cords->offset;
 	cords->end = cords->mid + cords->offset;
 }
-void	sort_stack(stack_t **a, stack_t **b, int *sorted_array)
+
+void	sort_stack(t_stack **a, t_stack **b, int *sorted_array)
 {
-	cords_t cords;
+	t_cords	cords;
 
 	init_cords(&cords, *a);
 	if (cords.size <= 5)

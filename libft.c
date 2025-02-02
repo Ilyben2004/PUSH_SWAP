@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ibennaje <ibennaje@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/02 18:33:25 by ibennaje          #+#    #+#             */
+/*   Updated: 2025/02/02 18:33:28 by ibennaje         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
@@ -83,7 +94,7 @@ long	ft_atoi(const char *str)
 	return (result * sign);
 }
 
-int	stack_size(stack_t *a)
+int	stack_size(t_stack *a)
 {
 	int	i;
 
