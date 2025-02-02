@@ -63,6 +63,7 @@ int included_in_stack (int value, stack_t *a)
     }
     return (0);
 }
+
 int abs(int a)
 {
     if (a >= 0)

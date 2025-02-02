@@ -4,6 +4,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <limits.h>
+# include <string.h>
 
 typedef struct stack_s {
     int value;             
@@ -43,12 +44,12 @@ void rb(stack_t ** b);
 void ra(stack_t ** a);
 void  rrb (stack_t **b);
 void rr(stack_t **a, stack_t **b);
+void  rrr (stack_t **a,stack_t **b);
 
 // **********************************//
 void sort_stack(stack_t **a , stack_t **b, int * sorted_array);
 int check_values_in_tab(stack_t *a, int * tab, int start , int end);
 int included_in_tab(int value, int * tab, int start , int end);
-void print_stack(stack_t * a);
 void turn_it_back_to_a(stack_t **a , stack_t **b ,int * tab, int size);
 int max_less_than(int max, int * tab , int size);
 int max_in_tab(int * tab , int size);
