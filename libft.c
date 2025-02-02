@@ -1,37 +1,36 @@
 
 #include "push_swap.h"
 
-
-size_t  ft_strlen(const char *s)
+size_t	ft_strlen(const char *s)
 {
-        size_t  i;
+	size_t	i;
 
-        i = 0;
-        while (s[i])
-        {
-                i++;
-        }
-        return (i);
+	i = 0;
+	while (s[i])
+	{
+		i++;
+	}
+	return (i);
 }
 
-char    *ft_strdup(const char *s)
+char	*ft_strdup(const char *s)
 {
-        char    *s2;
-        size_t  size;
-        size_t  i;
+	char	*s2;
+	size_t	size;
+	size_t	i;
 
-        size = ft_strlen(s);
-        s2 = (char *)malloc(size + 1);
-        if (!s2)
-                return (NULL);
-        i = 0;
-        while (i < size)
-        {
-                s2[i] = s[i];
-                i++;
-        }
-        s2[i] = 0;
-        return (s2);
+	size = ft_strlen(s);
+	s2 = (char *)malloc(size + 1);
+	if (!s2)
+		return (NULL);
+	i = 0;
+	while (i < size)
+	{
+		s2[i] = s[i];
+		i++;
+	}
+	s2[i] = 0;
+	return (s2);
 }
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
@@ -59,41 +58,40 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (substr);
 }
 
-long     ft_atoi(const char *str)
+long	ft_atoi(const char *str)
 {
-        long             sign;
-        long  result;
+	long	sign;
+	long	result;
 
-        result = 0;
-        sign = 1;
-        if (*str == '-' || *str == '+')
-        {
-            if (*str == '-')
-                    sign = -1;
-            str++;
-        }
-        while (ft_isdigit(*str))
-        {
-            result = result * 10 + (*str - '0');
-            if(result > INT_MAX && sign == 1)
-                return (result);
-            if (result > ((long ) INT_MAX + 1) && !sign)
-                return(-result);    
-            str++;
-        }
-        return (result * sign);
+	result = 0;
+	sign = 1;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			sign = -1;
+		str++;
+	}
+	while (ft_isdigit(*str))
+	{
+		result = result * 10 + (*str - '0');
+		if (result > INT_MAX && sign == 1)
+			return (result);
+		if (result > ((long)INT_MAX + 1) && !sign)
+			return (-result);
+		str++;
+	}
+	return (result * sign);
 }
 
-int stack_size(stack_t *a)
+int	stack_size(stack_t *a)
 {
-    int i;
-    
-    i = 0;
-    while (a)
-    {
-        i++;
-        a = a->next;
-    }
-    return (i);
+	int	i;
 
+	i = 0;
+	while (a)
+	{
+		i++;
+		a = a->next;
+	}
+	return (i);
 }
