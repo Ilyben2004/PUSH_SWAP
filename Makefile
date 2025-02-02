@@ -1,7 +1,7 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror #-fsanitize=address
 NAME = push_swap
-CHECKER_DIR = bonus
+CHECKER_DIR = checker_programm
 CHECKER = checker
 
 MAIN = push_swap.c
